@@ -1,7 +1,6 @@
+from posts.models import Comment, Follow, Group, Post, User
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
-
-from posts.models import Comment, Follow, Group, Post, User
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -56,5 +55,5 @@ class FollowSerializer(serializers.ModelSerializer):
     def validate(self, data):
         if data['user'] == data['following']:
             raise serializers.ValidationError(
-                'Ошибка')
+                'Ошибка - нельзя подписаться на самого себя')
         return data
